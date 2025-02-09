@@ -8,7 +8,7 @@ namespace Exam02
 {
     internal class FinalExam : Exam
     {
-        public FinalExam(uint time, uint number, QuestionBase[] questions) : base(time, number, questions)
+        public FinalExam(uint time, uint number) : base(time, number)
         {
 
         }

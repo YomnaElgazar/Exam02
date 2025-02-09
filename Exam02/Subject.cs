@@ -41,17 +41,18 @@ namespace Exam02
 
             if (examtype == 1)
             {
-                Exam = new PracticalExam(time, question, new QuestionBase[question]);
+                Exam = new PracticalExam(time, question/*, new QuestionBase[question]*/);
                 Exam.Questions = Exam.ExamCreation(Exam.NumberOfQuestions);
 
             }
             else
             {
 
-                Exam = new FinalExam(time, question, new QuestionBase[question]);
+                Exam = new FinalExam(time, question);
                 Exam.Questions = Exam.ExamCreation(Exam.NumberOfQuestions);
             }
         }
 
     }
+
 }

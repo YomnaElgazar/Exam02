@@ -12,11 +12,12 @@ namespace Exam02
         public uint NumberOfQuestions { get; set; }
         public QuestionBase[] Questions { get; set; }
 
-        public Exam(uint time, uint numberofquestions, QuestionBase[] questions)
+        public Exam(uint time, uint numberofquestions)
         {
             Time = time;
             NumberOfQuestions = numberofquestions;
-            Questions = questions;
+            //Questions = questions;
+            Questions= new QuestionBase[NumberOfQuestions];
         }
         abstract public QuestionBase[] ExamCreation(uint numberofQuestion);
         public static void PracticalExamBehavior(int i, QuestionBase[] tFQuestions)
@@ -61,13 +62,13 @@ namespace Exam02
                     {
                         if (Questions[i].Choices.Length > 2)
                         {
-                            usertext = Questions[i].Choices[i];
+                            usertext = Questions[i].Choices[i].AnswerText;
                             UserAnswer = new Answer(useranswerId, usertext);
                             break;
                         }
                         else
                         {
-                            usertext = Questions[i].Choices[j-1];
+                            usertext = Questions[i].Choices[j-1].AnswerText;
                             UserAnswer = new Answer(useranswerId, usertext);
                             break;
                         }
@@ -75,8 +76,13 @@ namespace Exam02
 
                 }
                 QuestionBase.Answers[i, 0] = UserAnswer;
-                if (useranswerId == Questions[i].RightAnswer.AnswerId)
+                //if (useranswerId == Questions[i].RightAnswer.AnswerId)
+                //{
+                //    degree += Questions[i].Mark;
+                //}
+                if (Questions[i].RightAnswer.CompareTo(UserAnswer) == 1)
                 {
+                    UserAnswer =(Answer) Questions[i].RightAnswer.Clone();
                     degree += Questions[i].Mark;
                 }
                 

@@ -8,7 +8,7 @@ namespace Exam02
 {
     internal class PracticalExam : Exam
     {
-        public PracticalExam(uint time, uint number, QuestionBase[] questions) : base(time, number, questions)
+        public PracticalExam(uint time, uint number) : base(time, number)
         {
 
         }

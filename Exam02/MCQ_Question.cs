@@ -9,10 +9,12 @@ namespace Exam02
 {
     internal class MCQ_Question :QuestionBase
     {
-        public MCQ_Question(String body, uint mark, string[] choices, string answerId, string answerText) : base("Choose One Answer Question", body, mark)
+        public MCQ_Question(String body, uint mark, Answer[] choices,int RightAnswerIndex) 
+            : base("Choose One Answer Question", body, mark, choices)
         {
-            Choices = choices;
-            RightAnswer = new Answer(answerId, answerText);
+            //Choices = choices;
+            RightAnswer = Choices[RightAnswerIndex];
+           // RightAnswer = new Answer(answerId, answerText);
 
         }
         public static MCQ_Question Question()
@@ -20,13 +22,20 @@ namespace Exam02
 
             Console.WriteLine("Please Enter Body of Question: ");
             string _body; uint _mark;
-            _body = Console.ReadLine();
+           
+            do
+            {
+                Console.WriteLine("Please Enter Body of Question: ");
+                _body = Console.ReadLine() ?? String.Empty;
+
+            } while (_body==String.Empty);
             do
             {
                 Console.WriteLine("Please Enter The Mark of Question :");
             } while (!uint.TryParse(Console.ReadLine(), out _mark));
             
-            uint choice, size;
+            uint  size;
+            int choice;
             
             do
             {
@@ -34,23 +43,28 @@ namespace Exam02
             } while (!uint.TryParse(Console.ReadLine(), out size));
 
             Console.WriteLine("The Choices of the Question : ");
-            string[] Choices = new string[size];
+            Answer[] Choices = new Answer[size];
             for (int i = 0; i < Choices.Length; i++)
             {
+                Choices[i].AnswerId = $"{i+1}";
+                do
+                {
                 Console.Write($"Please Enter the Choice Number {i + 1} : ");
-                Choices[i] = Console.ReadLine();
+                    Choices[i].AnswerText = Console.ReadLine() ??string.Empty; 
+                } while (Choices[i].AnswerText==string.Empty);
             }
             do
             {
                 Console.WriteLine("Please Spacify The right Choice: ");
             }
-            while (!((uint.TryParse(Console.ReadLine(), out choice)) && (choice <= Choices.Length)));
-            return new MCQ_Question(_body, _mark, Choices, choice.ToString(), Choices[choice - 1]);
+            while (!((int.TryParse(Console.ReadLine(), out choice)) && (choice <= Choices.Length)));
+            return new MCQ_Question(_body, _mark, Choices,choice-1);
 
         }
         public override string ToString()
         {
-            string choice = Choices != null ? string.Join($"\n", Choices) : "No Choices";
+    
+            string choice = Choices != null ? string.Join($"\n", Choices.ToString()) : "No Choices";
             return $"{Header}  Mark:{Mark}\n{Body}\n{choice}\n------------------------------------------------";
         }
 
