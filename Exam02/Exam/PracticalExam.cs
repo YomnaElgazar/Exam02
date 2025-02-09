@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Exam02.question;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,17 +9,17 @@ namespace Exam02
 {
     internal class PracticalExam : Exam
     {
-        public PracticalExam(uint time, uint number) : base(time, number)
+        public PracticalExam(int time, int number) : base(time, number)
         {
 
         }
-        public override QuestionBase[] ExamCreation(uint numberofQuestion)
+        public override QuestionBase[] ExamCreation(int numberofQuestion)
         {
 
             QuestionBase[] tFQuestions = new QuestionBase[numberofQuestion];
             for (int i = 0; i < numberofQuestion; i++)
             {
-                PracticalExamBehavior(i, tFQuestions);
+               TrueFalseQuestion.CreateQuestion();
             }
             return tFQuestions;
         }

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Exam02.subject;
+using System.Diagnostics;
 
 namespace Exam02
 {
